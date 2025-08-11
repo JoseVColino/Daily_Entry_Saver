@@ -1,11 +1,119 @@
 import tkinter as tk
+from tkinter import filedialog
+from tkinter import messagebox
+from datetime import datetime
+from pathlib import Path
+import shutil
+import os
 
 root = tk.Tk()
+w, h = 600, 500
 
-root.geometry('800x400')
+ws = root.winfo_screenwidth()
+hs = root.winfo_screenheight()
+x = (ws // 2) - (w // 2)
+y = (hs // 2) - (h // 2)
+
+root.geometry(f"{w}x{h}+{x}+{y}")
 root.title("this is my smart file saver")
 
-button = tk.Button(text='this is a button!', command=lambda : print('test'), height=5)
-button.pack()
+
+file_path = tk.StringVar()
+
+portuguese_month_dict = {
+    1: 'Janeiro',
+    2: 'Fevereiro',
+    3: 'Marco',
+    4: 'Abril',
+    5: 'Maio',
+    6: 'Junho',
+    7: 'Julho',
+    8: 'Agosto',
+    9: 'Setembro',
+    10: 'Outubro',
+    11: 'Novembro',
+    12: 'Dezembro',
+}
+
+def update_preview(file_path: str):
+    with open(file_path, 'r', encoding='utf-8') as file:
+        content = file.read()
+        preview.delete("1.0", tk.END)
+        preview.insert(tk.END, content)
+
+def lazy_structure_saving(file_path: str, destination_folder: str):
+    now = datetime.now()
+    year = str(now.year)
+    month = portuguese_month_dict[now.month]
+    day = f'{now.day:02}'
+
+    base = Path(destination_folder)
+    dir_path = base / year / month
+    dir_path.mkdir(parents=True, exist_ok=True)
+
+    format_file_name = f'{year}.{now.month:02}.{day}_{Path(file_path).name}'
+
+    shutil.copy2(file_path, dir_path / format_file_name)
+    update_previous_file()
+
+    messagebox.showinfo(
+        title='Success!',
+        message=f'File was successfully saved at {file_path}',
+        icon='info',
+        default='ok'
+    )
+
+def update_previous_file():
+    with open('previous_file.txt', 'w', encoding='utf8') as file:
+        file.write(file_path.get())
+        file.writelines([file_path.get() + '\n', destination_folder.get()])
+
+def retrieve_previous_file():
+    with open('previous_file.txt', 'r', encoding='utf8') as file:
+        file_path.set(file.readline().strip())
+        destination_folder.set(file.readline().strip())
+
+
+def handle_save_button():
+    file = filedialog.askopenfilename(filetypes=[("Text files", "*.txt")])
+    
+    if file:
+        file_path.set(file)
+        update_preview(file_path.get())
+        lazy_structure_saving(file_path.get(), destination_folder.get())
+
+def handle_destination_folder_button():
+    folder = filedialog.askdirectory()
+    destination_folder.set(folder)
+
+tk.Label(text="Select a destination folder:").pack()
+destination_folder = tk.StringVar()
+
+tk.Label(textvariable=destination_folder).pack()
+
+tk.Button(
+    text='pick folder',
+    command=handle_destination_folder_button
+).pack()
+
+tk.Label(text="Is the destination folder okay?\n if so, pick a file by clicking the button bellow").pack()
+
+save_button = tk.Button(
+    root,
+    text='save file', 
+    command= handle_save_button, 
+)
+save_button.pack()
+
+
+tk.Label(root, textvariable=file_path).pack()
+tk.Label(root, text='Preview of saved file:').pack()
+
+preview = tk.Text(
+    root
+)
+preview.pack()
+
+retrieve_previous_file()
 
 root.mainloop()
