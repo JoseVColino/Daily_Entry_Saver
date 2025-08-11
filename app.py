@@ -7,16 +7,16 @@ import shutil
 import os
 
 root = tk.Tk()
-w, h = 600, 500
+window_width, window_height = 600, 500
 
-ws = root.winfo_screenwidth()
-hs = root.winfo_screenheight()
-x = (ws // 2) - (w // 2)
-y = (hs // 2) - (h // 2)
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
+x_displacement = (screen_width // 2) - (window_width // 2)
+y_displacement = (screen_height // 2) - (window_height // 2)
 
-root.geometry(f"{w}x{h}+{x}+{y}")
-root.title("this is my smart file saver")
+root.geometry(f"{window_width}x{window_height}+{x_displacement}+{y_displacement}")
 
+root.title("this is my lazy file saver")
 
 file_path = tk.StringVar()
 
@@ -74,13 +74,15 @@ def retrieve_previous_file():
         destination_folder.set(file.readline().strip())
 
 
-def handle_save_button():
+def handle_pick_file_button():
     file = filedialog.askopenfilename(filetypes=[("Text files", "*.txt")])
     
     if file:
         file_path.set(file)
         update_preview(file_path.get())
-        lazy_structure_saving(file_path.get(), destination_folder.get())
+
+def handle_save_button():
+    lazy_structure_saving(file_path.get(), destination_folder.get())
 
 def handle_destination_folder_button():
     folder = filedialog.askdirectory()
@@ -97,6 +99,12 @@ tk.Button(
 ).pack()
 
 tk.Label(text="Is the destination folder okay?\n if so, pick a file by clicking the button bellow").pack()
+
+pick_file = tk.Button(
+    root,
+    text='pick file',
+    command=handle_pick_file_button
+)
 
 save_button = tk.Button(
     root,
