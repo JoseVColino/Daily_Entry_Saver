@@ -65,7 +65,6 @@ def lazy_structure_saving(file_path: str, destination_folder: str):
 
 def update_previous_file():
     with open('previous_file.txt', 'w', encoding='utf8') as file:
-        file.write(file_path.get())
         file.writelines([file_path.get() + '\n', destination_folder.get()])
 
 def retrieve_previous_file():
@@ -100,22 +99,21 @@ tk.Button(
 
 tk.Label(text="Is the destination folder okay?\n if so, pick a file by clicking the button bellow").pack()
 
-pick_file = tk.Button(
+tk.Label(root, textvariable=file_path).pack()
+tk.Button(
     root,
     text='pick file',
     command=handle_pick_file_button
-)
+).pack()
 
-save_button = tk.Button(
+tk.Button(
     root,
     text='save file', 
     command= handle_save_button, 
-)
-save_button.pack()
+).pack()
 
 
-tk.Label(root, textvariable=file_path).pack()
-tk.Label(root, text='Preview of saved file:').pack()
+tk.Label(root, text='Preview of text file:').pack()
 
 preview = tk.Text(
     root
