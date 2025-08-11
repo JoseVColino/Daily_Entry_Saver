@@ -10,10 +10,10 @@ It remembers your last selected file and destination folder, so you can easily u
 - 📅 **Automatic date-based organization** with folders like:
 ```
 
-destination\_folder/  
-2025/  
-Agosto/  
-2025.08.10\_myfile.txt
+destination_folder/  
+	2025/  
+		Agosto/  
+			2025.08.10\_myfile.txt
 
 ```
 - 🗂 **Portuguese month names** instead of numbers  
@@ -25,19 +25,20 @@ Agosto/
 ---
 
 ## 📸 Screenshot
-*(Add one here when you upload to GitHub)*
+<img width="600" height="530" alt="image" src="https://github.com/user-attachments/assets/a99fac61-dfe9-426b-8d9d-fa6b6937adb6" />
+
 
 ---
 
 ## 🚀 How to Run
 1. **Clone this repository**
-\`\`\`bash
-git clone https://github.com/yourusername/smart-file-saver.git
-cd smart-file-saver
+```bash
+git clone https://github.com/JoseVColino/Daily_Entry_Saver.git
+cd Daily_Entry_Saver
 ```
-2. **Install Python** (3.8+ recommended)
+2. **Install Python if you haven't** (3.8+ recommended)
 3. **Run the app**
-```
+```bash
 python app.py
 ```
 
@@ -75,11 +76,4 @@ MIT License – feel free to use, modify, and share.
 
 ## 🙌 Author
 
-Developed by **\[Your Name\]** — because saving files should be smart, quick, and organized.
-
-```
----
-
-If you want, I can also include a **GIF or screenshot section** and instructions for making them so your GitHub page looks more polished.  
-Do you want me to add that in the README?
-```
+Developed by **José Victor Colino** — because coding is fun and saving files isn't.
