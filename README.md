@@ -25,7 +25,8 @@ destination_folder/
 ---
 
 ## 📸 Screenshot
-<img width="600" height="530" alt="image" src="https://github.com/user-attachments/assets/796b6dee-d6b2-43ee-8479-1fbaf5fb79ed" />
+<img width="600" height="530" alt="image" src="https://github.com/user-attachments/assets/8fdfa6f1-b15d-41f5-9ed7-82b499db083e" />
+
 
 
 ---
