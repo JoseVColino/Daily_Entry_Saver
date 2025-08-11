@@ -1,7 +1,7 @@
 # 📂 Daily Entry Saver
 Originated for my personal use and curiosity to build something usefull using tkinter and python!
 
-A simple but usefull **Python desktop app** (built with \`tkinter\`) that saves a copy of a \`.txt\` file into a date-organized folder structure — **with Portuguese month names** — and keeps a preview right in the app.  
+A simple but useful **Python desktop app** (built with \`tkinter\`) that saves a copy of a \`.txt\` file into a date-organized folder structure — **with Portuguese month names** — and keeps a preview right in the app.  
 It remembers your last selected file and destination folder, so you can easily use it daily.
 
 ---
