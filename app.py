@@ -66,7 +66,6 @@ def lazy_structure_saving(file_path: str, destination_folder: str):
 def update_previous_file():
     with open('previous_file.txt', 'w', encoding='utf8') as file:
         file.writelines([file_path.get() + '\n', destination_folder.get()])
-    update_preview('previous_file.txt')
 
 def retrieve_previous_file():
     try:
