@@ -66,12 +66,20 @@ def lazy_structure_saving(file_path: str, destination_folder: str):
 def update_previous_file():
     with open('previous_file.txt', 'w', encoding='utf8') as file:
         file.writelines([file_path.get() + '\n', destination_folder.get()])
+    update_preview('previous_file.txt')
 
 def retrieve_previous_file():
-    with open('previous_file.txt', 'r', encoding='utf8') as file:
-        file_path.set(file.readline().strip())
-        destination_folder.set(file.readline().strip())
+    try:
+        with open('previous_file.txt', 'r', encoding='utf8') as file:
+            file_from_previous = file.readline().strip()
+            destination_folder_from_previous = file.readline().strip()
 
+            file_path.set(file_from_previous)
+            destination_folder.set(destination_folder_from_previous)
+
+        update_preview(file_from_previous)
+    except FileNotFoundError:
+        pass
 
 def handle_pick_file_button():
     file = filedialog.askopenfilename(filetypes=[("Text files", "*.txt")])
