@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import filedialog
 from tkinter import messagebox
 from datetime import datetime
+from datetime import timedelta
 from pathlib import Path
 import shutil
 import os
@@ -42,7 +43,11 @@ def update_preview(file_path: str):
         preview.insert(tk.END, content)
 
 def lazy_structure_saving(file_path: str, destination_folder: str):
-    now = datetime.now()
+    if (last_day):
+        now = datetime.now() - timedelta(days=1)
+    else:
+        now = datetime.now()
+        
     year = str(now.year)
     month = portuguese_month_dict[now.month]
     day = f'{now.day:02}'
@@ -119,6 +124,8 @@ tk.Button(
     command= handle_save_button, 
 ).pack()
 
+last_day = tk.BooleanVar()
+tk.Checkbutton(variable=last_day).pack()
 
 tk.Label(root, text='Preview of text file:').pack()
 
