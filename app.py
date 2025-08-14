@@ -47,7 +47,7 @@ def lazy_structure_saving(file_path: str, destination_folder: str):
         now = datetime.now() - timedelta(days=1)
     else:
         now = datetime.now()
-        
+
     year = str(now.year)
     month = portuguese_month_dict[now.month]
     day = f'{now.day:02}'
@@ -125,7 +125,7 @@ tk.Button(
 ).pack()
 
 last_day = tk.BooleanVar()
-tk.Checkbutton(variable=last_day).pack()
+tk.Checkbutton(text="Past midnight? ", variable=last_day).pack()
 
 tk.Label(root, text='Preview of text file:').pack()
 
