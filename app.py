@@ -125,7 +125,7 @@ tk.Button(
 ).pack()
 
 last_day = tk.BooleanVar(value=False)
-tk.Checkbutton(text="Past midnight? ", variable=last_day, state=False).pack()
+tk.Checkbutton(text="Past midnight? ", variable=last_day).pack()
 
 tk.Label(root, text='Preview of text file:').pack()
 
