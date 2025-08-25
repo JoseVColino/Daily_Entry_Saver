@@ -43,7 +43,7 @@ def update_preview(file_path: str):
         preview.insert(tk.END, content)
 
 def lazy_structure_saving(file_path: str, destination_folder: str):
-    if (last_day):
+    if (last_day.get()):
         now = datetime.now() - timedelta(days=1)
     else:
         now = datetime.now()
@@ -124,8 +124,8 @@ tk.Button(
     command= handle_save_button, 
 ).pack()
 
-last_day = tk.BooleanVar()
-tk.Checkbutton(text="Past midnight? ", variable=last_day).pack()
+last_day = tk.BooleanVar(value=False)
+tk.Checkbutton(text="Past midnight? ", variable=last_day, state=False).pack()
 
 tk.Label(root, text='Preview of text file:').pack()
 
